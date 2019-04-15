@@ -56,22 +56,22 @@ class LikeSystem:
         dj = dj / np.linalg.norm(dj)
         return np.sum(np.power(di - dj, 2.0))
 
-    def calcLikehood(self, pi):
-        likehoods = np.zeros(len(self.pList))
+    def calclikelihood(self, pi):
+        likelihoods = np.zeros(len(self.pList))
         for j in range(len(self.pList)):
 
-            likehoods[j] = self.getDistance(pi, self.pList[j])
-        return likehoods
+            likelihoods[j] = self.getDistance(pi, self.pList[j])
+        return likelihoods
 
-    def getMost(self, likehoods, n):
-        lmax = np.argsort(likehoods)
+    def getMost(self, likelihoods, n):
+        lmax = np.argsort(likelihoods)
         outlist = np.array(self.pList)
-        return outlist[lmax[0:n]], likehoods[lmax[0:n]]    # skip itself
+        return outlist[lmax[0:n]], likelihoods[lmax[0:n]]    # skip itself
 
 lk = LikeSystem()
 lk.readData()
 print('Loaded from API')
 elsa = lk.getPlayerByName('Guxue')
-lh = lk.calcLikehood(elsa)
+lh = lk.calclikelihood(elsa)
 pymost = lk.getMost(lh, 5)
 print(pymost)
